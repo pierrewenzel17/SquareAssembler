@@ -1,4 +1,5 @@
 from stringcolor import cs
+
 from core.models import Cube, Position, Color
 
 
@@ -76,6 +77,96 @@ class Grid:
                 string_builder += "|" + cs("cube", value.color.value)
             string_builder += "|\n"
         return string_builder
+
+    def trouve_forme(self, cube, x, y) -> []:
+        """
+
+        :param colorcube:
+        :param x:
+        :param y:
+        :return:
+        """
+        if x < 0 or y < 0 or x >= self.nb_col_row or y >= self.nb_col_row:
+            return []
+        elif self[x, y] is None or cube is None:
+            return []
+        elif self[x, y].color == cube.color and self[x, y].est_visitable():
+            self[x, y].setvisitable(False)
+            tab_cube = []
+            tab_cube.append(Position(x, y))
+            left = self.trouve_forme(cube, x - 1, y)
+            rigth = self.trouve_forme(cube, x + 1, y)
+            down = self.trouve_forme(cube, x, y + 1)
+            up = self.trouve_forme(cube, x, y - 1)
+            tab_cube.extend(up)
+            tab_cube.extend(down)
+            tab_cube.extend(left)
+            tab_cube.extend(rigth)
+            return tab_cube
+        else:
+            return []
+
+    def __clear_cube_fantome(self, position):
+        """
+
+        :param cube: cube qui a était supprimer :sert de réference pour conettre la colone ou il y a un ccube en trops
+        :return:
+        """
+        i = 0
+        while self.matrix[i][position.y] is None:
+            i = i + 1
+        self.matrix[i][position.y] = None
+
+    def retrait_cubes(self, tab_cube):
+        for position in tab_cube:
+            x = position.x
+            'pour chaque cube à suprimer  on fait décendre les cubes qui sont au dessus '
+            while x > 0 and self[x - 1, position.y] is not None:
+                self[x, position.y] = self[x - 1, position.y]
+                x = x - 1
+            ' one foie le decalge effectuer on retire le cube (residuele le plus haut) '
+        for cube in tab_cube:
+            self.clear_cube_fantome(cube)
+        for cube in tab_cube:
+            self.retrait_colonne_vide(cube.y)
+
+    def __colone_est_vide(self, y) -> bool:
+        check = True
+        x = 0
+        while check and x < self.nb_col_row:
+            if self[x, y] is not None:
+                check = False
+            x += 1
+        return check
+
+    def __destruct_last_colunn(self):
+        for x in range(0, self.nb_col_row):
+            self[x, self.nb_col_row - 1] = None
+
+    def __retrait_colonne_vide(self, y):
+        if self.__colone_est_vide(y):
+            for col in range(y, self.nb_col_row - 1):
+                for ligne in range(0, self.nb_col_row):
+                    self[ligne, col] = self[ligne, col + 1]
+            self.__destruct_last_colunn()
+
+    def demarcage(self, liste):
+        for position in liste:
+            x, y = position.x, position.y
+            self[x, y].setvisitable(True)
+
+    def fini(self) -> bool:
+        '''
+
+        :return: un booléain indiquant la fin de la partie
+        '''
+        for x in range(0, self.nb_col_row):
+            for y in range(0, self.nb_col_row):
+                liste = self.trouve_forme(self[x, y], x, y)
+                self.demarcage(liste)
+                if (len(liste) >= 2):
+                    return False
+        return True
 
     @classmethod
     def grid_by_ten(cls) -> 'Grid':

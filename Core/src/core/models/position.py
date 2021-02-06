@@ -5,7 +5,7 @@ class Position:
         """
         Constructeur
         :param x: coordonnée en X
-        :param y: coordonnée en Y
+        :param y: coordonnée en Y   ( ceci n 'a  aucun sens )
         """
         self.i, self.j = i, j
 
@@ -34,6 +34,14 @@ class Position:
         """
         return f"i = {self.i}, j = {self.j}"
 
+    def __lt__(self, o: object) -> bool:
+        """
+         Définition de l'opérateur <, par consequent vérifie que la position courant
+        est inférieur  à la position passé en paramètre , la vérification ce fait par rapport a l'axe des i !!!!!
+        :param position: La position à tester
+        :return: True ou False selon les valeurs de position . si self.i<position.i alors True sinon false
+        """
+        return self.i < o.i
 
 # main de test pour la classe Position
 if __name__ == '__main__':
