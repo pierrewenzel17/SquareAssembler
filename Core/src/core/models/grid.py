@@ -80,11 +80,11 @@ class Grid:
 
     def trouve_forme(self, cube, x, y) -> []:
         """
-
-        :param colorcube:
-        :param x:
-        :param y:
-        :return:
+        fonction recherchant une  suite de cube de même couleur à partir d'une case de la grille
+        :param cube:  cube de référence ,permet de connaitre la couleur souhaité
+        :param x: la cordoné sur l'axe des i
+        :param y: ma coordonnée sur l'axe des j
+        :return: une liste de position
         """
         if x < 0 or y < 0 or x >= self.nb_col_row or y >= self.nb_col_row:
             return []
@@ -108,29 +108,41 @@ class Grid:
 
     def __clear_cube_fantome(self, position):
         """
-
-        :param cube: cube qui a était supprimer :sert de réference pour conettre la colone ou il y a un ccube en trops
+        fonction qui efface les cube qui n'ont plus lieux d'être
+        :param cube: cube qui a était supprimer :sert de réference pour conettre la colone ou il y a un cube en trops
         :return:
         """
         i = 0
-        while self.matrix[i][position.y] is None:
+        while self[i, position.j] is None:
             i = i + 1
-        self.matrix[i][position.y] = None
+        self[i, position.j] = None
 
-    def retrait_cubes(self, tab_cube):
-        for position in tab_cube:
-            x = position.x
+    def retrait_cubes(self, tab_position):
+        """
+        fonction effectuant la suppression des cubes
+        :param tab_position:  tableau de Positiion , contenant le position des cube à
+        supprimer
+        :return:
+        """
+        for position in tab_position:
+            x = position.i
             'pour chaque cube à suprimer  on fait décendre les cubes qui sont au dessus '
-            while x > 0 and self[x - 1, position.y] is not None:
-                self[x, position.y] = self[x - 1, position.y]
+            while x > 0 and self[x - 1, position.j] is not None:
+                self[x, position.j] = self[x - 1, position.j]
                 x = x - 1
             ' one foie le decalge effectuer on retire le cube (residuele le plus haut) '
-        for cube in tab_cube:
-            self.clear_cube_fantome(cube)
-        for cube in tab_cube:
-            self.retrait_colonne_vide(cube.y)
+        for position in tab_position:
+            self.__clear_cube_fantome(position)
+            ' enfin on vérifie si la supresion des cube à engendré une colonne vide  et on la suprimme si c est le cas'
+        for position in tab_position:
+            self.__retrait_colonne_vide(position.j)
 
-    def __colone_est_vide(self, y) -> bool:
+    def __colone_est_vide(self, y: int) -> bool:
+        """
+        fonction vérifiant si une colone est vide
+        :param y:  numéro de la colonne que l'on souhaite vérifier
+        :return:  True si la colonne est vide , sinon false
+        """
         check = True
         x = 0
         while check and x < self.nb_col_row:
@@ -140,10 +152,21 @@ class Grid:
         return check
 
     def __destruct_last_colunn(self):
+        """
+        fonction qui d'étruit la dernière colonne de la grille , nesert qu'une foispar partie ,
+        au moment de la supression de la première colone vide
+
+        """
         for x in range(0, self.nb_col_row):
             self[x, self.nb_col_row - 1] = None
 
     def __retrait_colonne_vide(self, y):
+        """
+        fonction qui enlève la  colonne y ,si elle est vide,  et décale les colones à droite de la colonne
+        y sur la gauche
+        :param y:   numéro de la colone vérifier
+        :return:
+        """
         if self.__colone_est_vide(y):
             for col in range(y, self.nb_col_row - 1):
                 for ligne in range(0, self.nb_col_row):
@@ -151,14 +174,19 @@ class Grid:
             self.__destruct_last_colunn()
 
     def demarcage(self, liste):
+        """
+        fonction qui reset le booléen utile à la fonction de parcourt de graphe :'trouveforme '
+        :param liste:
+        :return:
+        """
         for position in liste:
             x, y = position.x, position.y
             self[x, y].setvisitable(True)
 
     def fini(self) -> bool:
         '''
-
-        :return: un booléain indiquant la fin de la partie
+        fonction vérifiant la fin de la partie
+        :return: true si il  reste plus de coup à jouer ,  sinon false
         '''
         for x in range(0, self.nb_col_row):
             for y in range(0, self.nb_col_row):
