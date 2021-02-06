@@ -18,7 +18,7 @@ class Grid:
         for i in range(0, nb_col_row):
             row = []
             for j in range(0, nb_col_row):
-                row.append(Cube(position=Position(i, j), color=Color.get_random_color(dict_color)))
+                row.append(Cube(color=Color.get_random_color(dict_color)))
             self.__matrix.append(row)
 
     def __getitem__(self, tup: tuple) -> Cube:
@@ -74,7 +74,10 @@ class Grid:
         string_builder = ""
         for row in self.__matrix:
             for value in row:
-                string_builder += "|" + cs("cube", value.color.value)
+                if value is None:
+                    string_builder += "|None"
+                else:
+                    string_builder += "|" + cs("cube", value.color.value)
             string_builder += "|\n"
         return string_builder
 
@@ -124,6 +127,7 @@ class Grid:
         supprimer
         :return:
         """
+        tab_position.sort()
         for position in tab_position:
             x = position.i
             'pour chaque cube à suprimer  on fait décendre les cubes qui sont au dessus '
@@ -180,7 +184,7 @@ class Grid:
         :return:
         """
         for position in liste:
-            x, y = position.x, position.y
+            x, y = position.i, position.j
             self[x, y].setvisitable(True)
 
     def fini(self) -> bool:
@@ -216,7 +220,7 @@ class Grid:
 # main de test pour la classe Grille
 if __name__ == '__main__':
     print("On test la classe grille")
-    grid_10: Grid = Grid.grid_by_ten()
+    grid_10 = Grid.grid_by_ten()
     print(grid_10)
     grid_20 = Grid.grid_by_twenty()
     print(grid_20)
@@ -224,3 +228,17 @@ if __name__ == '__main__':
 
     for cube in grid_10:
         print(cube)
+
+    # simulation d'ue partie
+    while not grid_10.fini():
+        print(grid_10)
+        l = 0
+        liste = []
+        while l < 2:
+            x = input("On veut quel ligne ?")
+            y = input("On veut quel colonne ?")
+            liste = grid_10.trouve_forme(grid_10[int(x), int(y)], int(x), int(y))
+            l = len(liste)
+            grid_10.demarcage(liste)
+        grid_10.retrait_cubes(liste)
+    print("end game")

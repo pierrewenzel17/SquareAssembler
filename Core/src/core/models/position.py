@@ -41,7 +41,11 @@ class Position:
         :param position: La position à tester
         :return: True ou False selon les valeurs de position . si self.i<position.i alors True sinon false
         """
-        return self.i < o.i
+        if self.i == o.i:
+            return self.j > o.j
+        else:
+            return self.i < o.i
+
 
 # main de test pour la classe Position
 if __name__ == '__main__':
