@@ -2,10 +2,10 @@
 
 <h3>Installation</h3>
 Installation des dépendances 
-```shell
+`shell
 pip install -r requirements.txt
-```
+`
 Remise à niveau des dépendances depuis la VM
-```shell
+`shell
  pip freeze > requirements.txt
-```
+`
