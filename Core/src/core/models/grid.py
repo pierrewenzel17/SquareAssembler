@@ -196,7 +196,7 @@ class Grid:
             for y in range(0, self.nb_col_row):
                 liste = self.trouve_forme(self[x, y], x, y)
                 self.demarcage(liste)
-                if (len(liste) >= 2):
+                if self.coup_valide(liste):
                     return False
         return True
 
@@ -215,6 +215,14 @@ class Grid:
         :return: la grille initialisée
         """
         return cls(20, 8)
+
+    def coup_valide(self, liste) -> bool:
+        """
+
+        :param liste:  liste de ase dont il faut vérifier la validité
+        :return:  true si la liste est composé d aux moins 3 élement , autrement return false
+        """
+        return len(liste) >= 3
 
 
 # main de test pour la classe Grille

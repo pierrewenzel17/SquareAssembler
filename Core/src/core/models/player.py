@@ -1,3 +1,6 @@
+import grid as Grid
+
+
 class Player:
     """
     Classe mère qui représente un joueur
@@ -45,3 +48,11 @@ class Player:
         :param value: la valeur dont il faut incrémenté
         """
         self.score += value
+
+    def play(self, board: Grid) -> []:
+        """
+        fonction abstrait qui permet à un joueur de jouer
+        :param board:
+        :return:
+        """
+        raise NotImplementedError
