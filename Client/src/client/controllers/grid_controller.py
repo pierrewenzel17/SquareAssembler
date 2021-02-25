@@ -1,5 +1,5 @@
-from client.controllers import Observer
-from client.views import GridView
+from client.controllers.view_update import Observer
+from client.views.grid_view import GridView
 
 
 class GridController(Observer):
@@ -8,6 +8,4 @@ class GridController(Observer):
         self.view = GridView(self.parent, self)
 
     def update(self, grid) -> None:
-        for widget in self.view.winfo_children():
-            widget.destroy()
         self.view.print_grid(grid)

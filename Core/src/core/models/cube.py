@@ -5,20 +5,20 @@ from core.models import Position
 class Cube:
     """Classe qui représente un Cube"""
 
-    def __init__(self, position: Position, color: Color) -> None:
+    def __init__(self, color: Color) -> None:
         """
         Constructeur
-        :param position: La position du cube dans la grille
         :param color: La couleur du cube
         """
-        self.position, self.color = position, color
-    
+        self.color = color
+        self.visit = True
+
     def __str__(self) -> str:
         """
         Méthode to string
         :return: la classe sous forme de string
         """
-        return f"position = {self.position}, color = {self.color}"
+        return f" color = {self.color}"
 
     def __eq__(self, cube: 'Cube') -> bool:
         """
@@ -27,7 +27,7 @@ class Cube:
         :param cube: Le cube à tester
         :return: True ou False selon les valeurs des cubes
         """
-        return self.color == cube.color and self.position == cube.position
+        return self.color == cube.color
 
     def __ne__(self, cube: 'Cube') -> bool:
         """
@@ -46,13 +46,28 @@ class Cube:
         """
         return self.color == cube.color
 
+    def est_visitable(self) -> bool:
+        """
+
+        :return: True si le cube n'a pas été visité , False si il a déjà  été visité
+        """
+        return self.visit
+
+    def set_visitable(self, bol: bool):
+        """
+
+        :param bol:  valeur  booleein  qui va remplacer l'ancienne
+        :return:  rien
+        """
+        self.visit = bol
+
 
 # main de test pour la classe Cube
 if __name__ == '__main__':
     print("On test la classe cube")
-    c1 = Cube(position=Position(1, 2), color=Color.RED)
-    c2 = Cube(position=Position(1, 2), color=Color.RED)
-    # On test ici le to_string
+    c1 = Cube(color=Color.RED)
+    c2 = Cube(color=Color.RED)
+    # On  test ici le to_string
     print(c1)
     # On test ici la fonction equal
     print(c1 == c2)

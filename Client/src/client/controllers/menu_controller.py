@@ -1,5 +1,7 @@
-from client.controllers import Observable
-from client.views import MenuView
+from tkinter import IntVar
+
+from client.controllers.view_update import Observable
+from client.views.menu_view import MenuView
 from core.models import Grid
 
 
@@ -15,4 +17,3 @@ class MenuController(Observable):
             super().notify(Grid.grid_by_ten())
         else:
             super().notify(Grid.grid_by_twenty())
-
