@@ -21,11 +21,5 @@ class GameOnePlayer(Game):
         self.__player.score = super.CubeArray.__len__()
 
 
-if __name__ == '__main__':
-    player = Human_player(1, "testeur")
-
-    board = Grid.grid_by_ten()
-    game = GameOnePlayer(board, player)
-    while  not game.clear() :
 
 

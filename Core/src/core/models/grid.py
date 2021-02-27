@@ -87,7 +87,7 @@ class Grid:
         :param cube:  cube de référence ,permet de connaitre la couleur souhaité
         :param x: la cordoné sur l'axe des i
         :param y: ma coordonnée sur l'axe des j
-        :return: une liste de position
+        :return: une liste de positions
         """
         if x < 0 or y < 0 or x >= self.nb_col_row or y >= self.nb_col_row:
             return []
