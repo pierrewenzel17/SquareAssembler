@@ -7,7 +7,8 @@ from core.models.grid import Grid
 
 class MenuController(Observable):
 
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, player) -> None:
+        self.player = player
         super().__init__()
         self.parent = parent
         self.view = MenuView(parent, self)

@@ -11,6 +11,7 @@ class HumanPlayer(Player):
         :param name: le nom du joueur
         """
         super().__init__(player_id, name)
+        self.tab_score=[]
 
     def __eq__(self, human_player: Player) -> bool:
         """
@@ -28,4 +29,10 @@ class HumanPlayer(Player):
         Méthode to string
         :return: la classe sous forme de string
         """
-        return f"Humain : {super().__str__()}"
+        sting= f"Humain : {super().__str__()}"
+        for score in self.tab_score:
+            sting += f" {score} "
+        return sting
+
+    def save_score(self):
+        self.tab_score.append(self.score)

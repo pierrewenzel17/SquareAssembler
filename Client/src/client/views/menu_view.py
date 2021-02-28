@@ -1,13 +1,9 @@
 from tkinter import Frame, Button, Menu, Toplevel, messagebox, IntVar, Label, Radiobutton, Checkbutton, BOTTOM, TOP
 
 
-
-
-def about():
-    messagebox.showinfo("Information", "Made by \n\n BURTIN Cyril \n WENZEL Pierre \n PHILIPP Sebastien ")
-
-
 class MenuView(Frame):
+    def about(self):
+        messagebox.showinfo(self.controller.player.__str__())
 
     def __init__(self, master, controller):
         super().__init__(master, background="white")
@@ -19,7 +15,7 @@ class MenuView(Frame):
         self.fileMenu.add_command(label="Quitter", command=master.quit)
         self.menuBar.add_cascade(label="Jeu", menu=self.fileMenu)
         self.helpMenu = Menu(self.menuBar, tearoff=0)
-        self.helpMenu.add_command(label="Aide", command=lambda: about())
+        self.helpMenu.add_command(label="Aide", command=lambda: self.about())
         self.menuBar.add_cascade(label="A propos", menu=self.helpMenu)
 
         master.config(menu=self.menuBar)

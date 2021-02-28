@@ -9,7 +9,7 @@ class Game:
         self.board = board
         self.CubeArray = []
 
-    def clear(self) -> bool:
+    def isclear(self) -> bool:
         return self.board.fini()
 
     @abstractmethod

@@ -14,11 +14,16 @@ class GridController:
         self.view.print_grid(self.game_controller.game.board)
 
     def onClickEvent(self, event) -> None:
-        self.game_controller.game.play()
-        self.printgrid()
-        print(self.game_controller.game.board)
-        self.game_controller.score_controller.var_score.set(self.game_controller.game.getscore())
-        self.onHoveringEvent(event)
+
+        """ réfléchir à l'enventualité de remonter le code dans la classe game_controlleur """
+        if len(self.game_controller.game.CubeArray)>2:
+            self.game_controller.game.play()
+            self.printgrid()
+            print(self.game_controller.game.board)
+            self.game_controller.score_controller.var_score.set(self.game_controller.game.getscore())
+            self.onHoveringEvent(event)
+            if self.game_controller.game.isclear():
+                self.game_controller.game.player.save_score()
 
     def onHoveringEvent(self, event):
         self.game_controller.game.move(self.__getCubeByCoord(event))

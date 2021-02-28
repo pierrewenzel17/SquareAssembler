@@ -11,11 +11,12 @@ from core.models.human_player import HumanPlayer
 class MainController:
 
     def __init__(self, root):
+        self.player=HumanPlayer(69, "test")
         self.parent = root
         self.view = MainFrameView(self.parent, self)
-        self.menu_controller = MenuController(self.parent)
+        self.menu_controller = MenuController(self.parent,self.player)
         self.game_controller = GameController(self.parent, GameOnePlayer(Grid.grid_by_ten(),
-                                                                         HumanPlayer(69, "test")))
+                                                                         self.player))
         self.menu_controller.add_observer(self.game_controller)
     def run(self):
         self.parent.mainloop()
