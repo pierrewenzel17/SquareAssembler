@@ -8,10 +8,10 @@ class Color(Enum):
     BLUE = "#07ACF4"
     GREEN = "#25D147"
     ORANGE = "#FE6C00"
-    PURPLE = "#EB58E9"
+    PURPLE = "#A30571"
     BROWN = "#C17A06"
     YELLOW = "#F3FF00"
-    PINK = "#000000"
+    PINK = "#EB58E9"
 
     def __eq__(self, color: Enum) -> bool:
         """
