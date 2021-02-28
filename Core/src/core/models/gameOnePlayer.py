@@ -15,7 +15,7 @@ class GameOnePlayer(Game):
 
     def move(self, x, y):
         super.CubeArray = self.board.trouveforme(self.board[x, y], x, y)
-
+        print(x)
     def play(self):
         super.play()
         self.__player.score = super.CubeArray.__len__()
