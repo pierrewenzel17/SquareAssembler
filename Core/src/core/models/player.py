@@ -1,4 +1,4 @@
-import grid as Grid
+import core.models.grid as Grid
 
 
 class Player:

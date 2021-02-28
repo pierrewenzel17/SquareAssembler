@@ -1,10 +1,10 @@
 from tkinter import StringVar
 
-from client.controllers.view_update import Observable
+from client.controllers.view_update import Observable, Observer
 from client.views.score_view import ScoreView
 
 
-class ScoreController(Observable):
+class ScoreController(Observer):
 
     def __init__(self, parent) -> None:
         super().__init__()

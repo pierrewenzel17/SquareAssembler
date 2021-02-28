@@ -1,5 +1,5 @@
-from core.models import Color
-from core.models import Position
+from core.models.color import Color
+
 
 
 class Cube:

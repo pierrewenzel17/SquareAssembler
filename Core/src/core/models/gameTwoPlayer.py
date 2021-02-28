@@ -1,6 +1,6 @@
-import game as Game
-import grid as Grid
-import player as Player
+import core.models.game as Game
+import core.models.grid as Grid
+import core.models.player as Player
 
 
 class GameTwoPlayer(Game):

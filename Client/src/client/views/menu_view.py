@@ -1,6 +1,6 @@
 from tkinter import Frame, Button, Menu, Toplevel, messagebox, IntVar, Label, Radiobutton, Checkbutton, BOTTOM, TOP
 
-from core.models import Player, Grid
+
 
 
 def about():

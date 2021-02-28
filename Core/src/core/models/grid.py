@@ -1,6 +1,8 @@
 from stringcolor import cs
 
-from core.models import Cube, Position, Color
+from core.models.cube import Cube
+from core.models.position import Position
+from core.models.color import Color
 
 
 class Grid:
