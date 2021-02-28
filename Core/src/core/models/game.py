@@ -17,9 +17,9 @@ class Game:
         pass
 
     @abstractmethod
-    def move(self, x, y):
-        raise NotImplementedError
+    def move(self, position):
+        pass
 
+    @abstractmethod
     def play(self):
-        self.board.retrait_cubes(self.CubeArray)
-
+        pass

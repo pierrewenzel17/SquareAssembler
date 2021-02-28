@@ -7,10 +7,13 @@ class GameController(Observer):
 
     def __init__(self, parent, game):
         self.game = game
-        self.grid_controller = GridController(parent)
-        self.grid_controller.printgrid(self.game.board)
+        self.grid_controller = GridController(parent,self)
+        self.grid_controller.printgrid()
         self.score_controller = ScoreController(parent)
 
     def update(self, data) -> None:
         self.game.board = data
-        self.grid_controller.printgrid(self.game.board)
+        self.game.player.score=0
+        self.grid_controller.printgrid()
+        self.score_controller.var_score.set("0")
+

@@ -97,8 +97,7 @@ class Grid:
             return []
         elif self[x, y].color == cube.color and self[x, y].est_visitable():
             self[x, y].setvisitable(False)
-            tab_cube = []
-            tab_cube.append(Position(x, y))
+            tab_cube = [Position(x, y)]
             left = self.trouve_forme(cube, x - 1, y)
             rigth = self.trouve_forme(cube, x + 1, y)
             down = self.trouve_forme(cube, x, y + 1)
@@ -244,11 +243,14 @@ if __name__ == '__main__':
         print(grid_10)
         l = 0
         liste = []
-        while l < 2:
+        while l < 3:
             x = input("On veut quel ligne ?")
             y = input("On veut quel colonne ?")
             liste = grid_10.trouve_forme(grid_10[int(x), int(y)], int(x), int(y))
+            for pos in liste :
+                print(pos)
             l = len(liste)
+
             grid_10.demarcage(liste)
         grid_10.retrait_cubes(liste)
     print("end game")

@@ -17,11 +17,18 @@ class GridView(Frame):
         canvas.pack(fill=BOTH, expand=1)
         for i in range(0, grid.nb_col_row):
             for j in range(0, grid.nb_col_row):
-                canvas.create_rectangle(i * cubeSize, j * cubeSize, cubeSize * (i + 1),
-                                        cubeSize * (j + 1), fill=grid[i, j].color.value)
-        # canvas.bind("<Button-1>", self.controller.onClickEvent)
-        # canvas.bind("<Motion>", self.controller.onHoveringEvent)
+                if grid[i, j] is not None:
+                    canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
+                                            cubeSize * (i + 1), fill=grid[i, j].color.value)
+        canvas.bind("<Button-1>", self.controller.onClickEvent)
+        canvas.bind("<Motion>", self.controller.onHoveringEvent)
 
     def clear_grid(self):
         for widget in self.winfo_children():
             widget.destroy()
+
+    def changeColorForme(self, selectedCubesPos):
+        """
+        Change la couleur des cubes adjacents au cube principal (même couleur)
+        :param selectedCubesPos: liste des cubes à modifier
+        """

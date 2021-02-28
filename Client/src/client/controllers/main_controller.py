@@ -14,7 +14,7 @@ class MainController:
         self.parent = root
         self.view = MainFrameView(self.parent, self)
         self.menu_controller = MenuController(self.parent)
-        self.game_controller = GameController(self.parent, GameOnePlayer(Grid.grid_by_twenty(),
+        self.game_controller = GameController(self.parent, GameOnePlayer(Grid.grid_by_ten(),
                                                                          HumanPlayer(69, "test")))
         self.menu_controller.add_observer(self.game_controller)
     def run(self):
