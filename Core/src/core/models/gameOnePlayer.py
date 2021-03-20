@@ -1,7 +1,7 @@
 from core.models.game import Game
 from core.models.grid import Grid
 from core.models.player import Player
-from core.models.human_player import HumanPlayer
+
 
 
 class GameOnePlayer(Game):

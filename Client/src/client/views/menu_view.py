@@ -3,7 +3,7 @@ from tkinter import Frame, Button, Menu, Toplevel, messagebox, IntVar, Label, Ra
 
 class MenuView(Frame):
     def about(self):
-        messagebox.showinfo(self.controller.player.__str__())
+        messagebox.showinfo("information",self.controller.player.__str__())
 
     def __init__(self, master, controller):
         super().__init__(master, background="white")

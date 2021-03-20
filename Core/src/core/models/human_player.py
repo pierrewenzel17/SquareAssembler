@@ -29,7 +29,7 @@ class HumanPlayer(Player):
         Méthode to string
         :return: la classe sous forme de string
         """
-        sting= f"Humain : {super().__str__()}"
+        sting= f"Humain : {super().__str__()}" + "score = "
         for score in self.tab_score:
             sting += f" {score} "
         return sting

@@ -40,7 +40,7 @@ class Player:
         Méthode to string
         :return: la classe sous forme de string
         """
-        return f"id = {self.id}, nom = {self.name}, score = {self.score}"
+        return f"id = {self.id}, nom = {self.name}, "
 
     def increment_score(self, value: int) -> None:
         """

@@ -1,4 +1,4 @@
-from tkinter import Frame, Canvas, BOTH
+from tkinter import Frame, Canvas, BOTH, messagebox
 
 from core.models.grid import Grid
 
@@ -32,3 +32,6 @@ class GridView(Frame):
         Change la couleur des cubes adjacents au cube principal (même couleur)
         :param selectedCubesPos: liste des cubes à modifier
         """
+
+    def endView(self):
+        messagebox.showinfo("fin de la partie ","vous avez fini la partie" )
