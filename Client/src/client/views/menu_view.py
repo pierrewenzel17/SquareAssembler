@@ -1,8 +1,6 @@
 from tkinter import Frame, Button, Menu, Toplevel, messagebox, IntVar, Label, Radiobutton, Checkbutton, BOTTOM, TOP
 
 
-
-
 def about():
     messagebox.showinfo("Information", "Made by \n\n BURTIN Cyril \n WENZEL Pierre \n PHILIPP Sebastien ")
 

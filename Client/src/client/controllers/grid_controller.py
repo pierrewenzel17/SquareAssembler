@@ -1,6 +1,4 @@
-from client.controllers.view_update import Observer
 from client.views.grid_view import GridView
-from core.models.grid import Grid
 from core.models.position import Position
 
 
@@ -24,8 +22,8 @@ class GridController:
         self.game_controller.game.move(self.__getCubeByCoord(event))
         self.view.changeColorForme(self.game_controller.game.CubeArray)
         self.game_controller.score_controller.var_block_score.set(len(self.game_controller.game.CubeArray))
-    def __getCubeByCoord(self, event):
 
+    def __getCubeByCoord(self, event):
         return Position(convertWorldToGrid(event.y, self.game_controller.game.board.nb_col_row),
                         convertWorldToGrid(event.x, self.game_controller.game.board.nb_col_row))
 
