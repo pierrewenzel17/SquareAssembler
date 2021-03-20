@@ -1,7 +1,3 @@
-from tkinter import Tk
-
-from client.controllers.main_controller import MainController
-from client.utils.constant_util import Constants
 from client.views.welcome_view import WelcomeView
 
 
