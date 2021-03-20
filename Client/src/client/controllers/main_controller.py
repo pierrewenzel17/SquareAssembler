@@ -13,10 +13,11 @@ class MainController:
 
     def __init__(self, mainFrame):
         self.mainFrame = mainFrame
+        player = HumanPlayer(69, "test")
         self.view = MainFrameView(self.mainFrame, self)
-        self.menu_controller = MenuController(self.mainFrame)
+        self.menu_controller = MenuController(self.mainFrame, player)
         self.game_controller = GameController(self.mainFrame, GameOnePlayer(Grid.grid_by_ten(),
-                                                                            HumanPlayer(69, "test")))
+                                                                            player))
         self.menu_controller.add_observer(self.game_controller)
 
     def run(self):
