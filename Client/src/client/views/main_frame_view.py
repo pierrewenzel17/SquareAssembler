@@ -2,7 +2,7 @@ from tkinter import Tk
 
 
 class MainFrameView:
-    """Classe qui représente un fenêtre"""
+    """Classe qui représente une fenêtre"""
 
     def __init__(self, parent: Tk, controller) -> None:
         self.controller = controller

@@ -9,11 +9,10 @@ class GridView(Frame):
         self.controller = controller
         self.grid(row=0, column=1, rowspan=2, ipadx=300, ipady=300, sticky="NEWS")
 
-
     def print_grid(self, grid):
         self.clear_grid()
         cubeSize = 600 / grid.nb_col_row
-        canvas = Canvas(self, width=0, height=0)
+        canvas = Canvas(self, width=0, height=0, borderwidth=0, highlightthickness=0)
         canvas.pack(fill=BOTH, expand=1)
         for i in range(0, grid.nb_col_row):
             for j in range(0, grid.nb_col_row):
