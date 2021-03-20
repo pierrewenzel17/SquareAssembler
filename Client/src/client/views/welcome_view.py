@@ -5,15 +5,6 @@ from client.controllers.main_controller import MainController
 from client.utils.constant_util import Constants
 
 
-def runGame():
-    mainFrame = Tk()
-    mainFrame.title(Constants.GAME_TITLE)
-    mainFrame.resizable(width=Constants.RESIZE_FRAME, height=Constants.RESIZE_FRAME)
-    mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
-    controller_main = MainController(mainFrame)
-    controller_main.run()
-
-
 class WelcomeView:
     def __init__(self, controller, root):
         self.controller = controller
@@ -23,8 +14,7 @@ class WelcomeView:
         self.canvas.pack(fill="both", expand=True)
         self.canvas.create_image(0, 0, image=self.bg, anchor="nw")
 
-        self.btnPlay = Button(self.canvas, text="Play", font=("Courier", 45, "bold"),
-                              command=self.test) \
+        self.btnPlay = Button(self.canvas, text="Play", font=("Courier", 45, "bold"), command=self.runGame) \
             .place(relx=0.5, rely=0.3, anchor=CENTER)
         self.btnQuit = Button(self.canvas, text="Quit", font=("Courier", 45, "bold"), command=self.root.quit) \
             .place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -44,6 +34,3 @@ class WelcomeView:
         mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
         controller_main = MainController(mainFrame)
         controller_main.run()
-
-    def test(self):
-        self.runGame()

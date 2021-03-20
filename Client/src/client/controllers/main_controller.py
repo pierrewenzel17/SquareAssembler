@@ -2,6 +2,7 @@ from tkinter import Tk
 
 from client.controllers.game_controller import GameController
 from client.controllers.menu_controller import MenuController
+from client.utils.constant_util import Constants
 from client.views.main_frame_view import MainFrameView
 from core.models.gameOnePlayer import GameOnePlayer
 from core.models.grid import Grid

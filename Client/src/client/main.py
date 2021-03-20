@@ -1,6 +1,5 @@
 from tkinter import Tk
 
-from client.controllers.main_controller import MainController
 from client.controllers.welcome_controller import WelcomeController
 from client.utils.constant_util import Constants
 
@@ -11,10 +10,3 @@ if __name__ == '__main__':
     root.resizable(width=False, height=False)
     welcome_controller = WelcomeController(root)
     welcome_controller.run()
-    '''
-    mainFrame = Tk()
-    mainFrame.title(Constants.GAME_TITLE)
-    mainFrame.resizable(width=Constants.RESIZE_FRAME, height=Constants.RESIZE_FRAME)
-    mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
-    controller_main = MainController(mainFrame)
-    controller_main.run()'''

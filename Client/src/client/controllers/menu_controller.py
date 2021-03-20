@@ -1,5 +1,3 @@
-from tkinter import IntVar
-
 from client.controllers.view_update import Observable
 from client.views.menu_view import MenuView
 from core.models.grid import Grid

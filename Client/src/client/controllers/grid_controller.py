@@ -12,24 +12,17 @@ class GridController:
         self.view.print_grid(self.game_controller.game.board)
 
     def onClickEvent(self, event) -> None:
-
-        """ réfléchir à l'enventualité de remonter le code dans la classe game_controlleur """
-        if len(self.game_controller.game.CubeArray)>2:
-            self.game_controller.game.play()
-            self.printgrid()
-
-            self.game_controller.score_controller.var_score.set(self.game_controller.game.getscore())
-            self.onHoveringEvent(event)
-            if self.game_controller.game.isclear():
-                self.game_controller.game.player.save_score()
-                self.view.endView()
+        self.game_controller.game.play()
+        self.printgrid()
+        print(self.game_controller.game.board)
+        self.game_controller.score_controller.var_score.set(self.game_controller.game.getscore())
+        self.onHoveringEvent(event)
 
     def onHoveringEvent(self, event):
         self.game_controller.game.move(self.__getCubeByCoord(event))
         self.view.changeColorForme(self.game_controller.game.CubeArray)
         self.game_controller.score_controller.var_block_score.set(len(self.game_controller.game.CubeArray))
-        print(self.game_controller.score_controller.var_block_score.get())
-        self.game_controller.score_controller.reloadScore()
+
     def __getCubeByCoord(self, event):
         return Position(convertWorldToGrid(event.y, self.game_controller.game.board.nb_col_row),
                         convertWorldToGrid(event.x, self.game_controller.game.board.nb_col_row))
