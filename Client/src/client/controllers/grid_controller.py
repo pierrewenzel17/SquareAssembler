@@ -9,12 +9,10 @@ class GridController:
         self.view = GridView(self.parent, self)
 
     def printgrid(self) -> None:
-        self.view.print_grid(self.game_controller.game.board)
+        self.view.print_grid(self.game_controller.game.board,self.game_controller.game.CubeArray)
 
     def onClickEvent(self, event) -> None:
         self.game_controller.game.play()
-        self.printgrid()
-        print(self.game_controller.game.board)
         self.game_controller.score_controller.var_score.set(self.game_controller.game.getscore())
         self.onHoveringEvent(event)
         if self.game_controller.game.isclear():
@@ -23,7 +21,7 @@ class GridController:
 
     def onHoveringEvent(self, event):
         self.game_controller.game.move(self.__getCubeByCoord(event))
-        self.view.changeColorForme(self.game_controller.game.CubeArray)
+        self.printgrid()
         self.game_controller.score_controller.var_block_score.set(len(self.game_controller.game.CubeArray))
 
     def __getCubeByCoord(self, event):
