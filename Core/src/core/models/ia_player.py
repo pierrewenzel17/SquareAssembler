@@ -1,4 +1,5 @@
-from core.models import Player, HumanPlayer
+from core.models.player import Player
+from core.models.human_player import HumanPlayer
 
 
 class IaPlayer(Player):

@@ -1,20 +1,24 @@
-from client.controllers.grid_controller import GridController
+from tkinter import Tk
+
+from client.controllers.game_controller import GameController
 from client.controllers.menu_controller import MenuController
-from client.controllers.score_controller import ScoreController
+from client.utils.constant_util import Constants
 from client.views.main_frame_view import MainFrameView
+from core.models.gameOnePlayer import GameOnePlayer
+from core.models.grid import Grid
+from core.models.human_player import HumanPlayer
 
 
 class MainController:
 
-    def __init__(self, root):
-        self.parent = root
-        self.view = MainFrameView(self.parent, self)
-        self.grid_controller = GridController(self.parent)
-        self.score_controller = ScoreController(self.parent)
-        self.menu_controller = MenuController(self.parent)
-        self.menu_controller.add_observer(self.grid_controller)
+    def __init__(self, mainFrame):
+        self.mainFrame = mainFrame
+        player = HumanPlayer(69, "test")
+        self.view = MainFrameView(self.mainFrame, self)
+        self.menu_controller = MenuController(self.mainFrame, player)
+        self.game_controller = GameController(self.mainFrame, GameOnePlayer(Grid.grid_by_ten(),
+                                                                            player))
+        self.menu_controller.add_observer(self.game_controller)
 
     def run(self):
-        self.parent.mainloop()
-
-
+        self.mainFrame.mainloop()

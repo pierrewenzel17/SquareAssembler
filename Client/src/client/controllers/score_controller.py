@@ -1,28 +1,12 @@
-from tkinter import StringVar
+from tkinter import IntVar
 
-from client.controllers.view_update import Observable
 from client.views.score_view import ScoreView
 
 
-class ScoreController(Observable):
+class ScoreController:
 
     def __init__(self, parent) -> None:
-        super().__init__()
         self.parent = parent
-        self.var_score = self.__create_string_var(self.update_label_score())
-        self.var_block_score = self.__create_string_var(self.update_label_block_score())
+        self.var_score = IntVar(value=0)
+        self.var_block_score = IntVar(value=0)
         self.view = ScoreView(parent, self)
-
-    def __create_string_var(self, observer):
-        value = StringVar()
-        value.set("0")
-        value.trace("w", observer)
-        return value
-
-    def update_label_score(self):
-        # TODO
-        pass
-
-    def update_label_block_score(self):
-        # TODO
-        pass

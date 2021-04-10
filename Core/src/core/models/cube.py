@@ -1,5 +1,5 @@
-from core.models import Color
-from core.models import Position
+from core.models.color import Color
+
 
 
 class Cube:
@@ -11,7 +11,7 @@ class Cube:
         :param color: La couleur du cube
         """
         self.color = color
-        self.visit = True
+        self.visite=True
 
     def __str__(self) -> str:
         """
@@ -46,27 +46,28 @@ class Cube:
         """
         return self.color == cube.color
 
+
     def est_visitable(self) -> bool:
         """
 
         :return: True si le cube n'a pas été visité , False si il a déjà  été visité
         """
-        return self.visit
+        return self.visite
 
-    def set_visitable(self, bol: bool):
+
+    def setvisitable(self, bol: bool):
         """
 
         :param bol:  valeur  booleein  qui va remplacer l'ancienne
         :return:  rien
         """
-        self.visit = bol
-
+        self.visite = bol
 
 # main de test pour la classe Cube
 if __name__ == '__main__':
     print("On test la classe cube")
-    c1 = Cube(color=Color.RED)
-    c2 = Cube(color=Color.RED)
+    c1 = Cube( color=Color.RED)
+    c2 = Cube( color=Color.RED)
     # On  test ici le to_string
     print(c1)
     # On test ici la fonction equal

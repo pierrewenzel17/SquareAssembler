@@ -1,4 +1,6 @@
-import grid as Grid
+from abc import abstractmethod
+
+import core.models.grid as Grid
 
 
 class Game:
@@ -7,14 +9,17 @@ class Game:
         self.board = board
         self.CubeArray = []
 
-    def clear(self) -> bool:
+    def isclear(self) -> bool:
         return self.board.fini()
 
+    @abstractmethod
     def getscore(self):
-        raise NotImplementedError
+        pass
 
-    def move(self, x, y):
-        raise NotImplementedError
-    def play(self ):
-        self.board.retrait_cubes(self.CubeArray)
+    @abstractmethod
+    def move(self, position):
+        pass
 
+    @abstractmethod
+    def play(self):
+        pass

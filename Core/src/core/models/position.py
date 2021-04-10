@@ -4,6 +4,7 @@ class Position:
     def __init__(self, i: int, j: int) -> None:
         """
         Constructeur
+        :rtype: object
         :param x: coordonnée en X
         :param y: coordonnée en Y   ( ceci n 'a  aucun sens )
         """

@@ -1,27 +1,50 @@
-from tkinter import Frame, Canvas, BOTH
+from tkinter import Frame, Canvas, BOTH, messagebox
 
-from core.models import Grid
+from core.models.grid import Grid
+from core.models.position import Position
 
 
 class GridView(Frame):
-
     def __init__(self, master, controller):
         super().__init__(master)
         self.controller = controller
         self.grid(row=0, column=1, rowspan=2, ipadx=300, ipady=300, sticky="NEWS")
-        self.print_grid(Grid.grid_by_ten())
 
-    def print_grid(self, grid):
+    def print_grid(self, grid,liste):
         self.clear_grid()
-
-        canvas = Canvas(self, width=0, height=0)
+        cubeSize = 600 / grid.nb_col_row
+        canvas = Canvas(self, width=0, height=0, borderwidth=0, highlightthickness=0)
         canvas.pack(fill=BOTH, expand=1)
-        rectangleSize = 600 / grid.nb_col_row
         for i in range(0, grid.nb_col_row):
             for j in range(0, grid.nb_col_row):
-                canvas.create_rectangle(i * rectangleSize, j * rectangleSize, rectangleSize * (i+1),
-                                        rectangleSize * (j+1), fill=grid[i, j].color.value)
+                if grid[i, j] is not None:
+                    vecteur=Position(i,j)
+                    if vecteur in liste:
+                        canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
+                                                cubeSize * (i + 1), fill=grid[i, j].color.value, stipple="gray50"
+                                                )
+                    else:
+                        canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
+                                            cubeSize * (i + 1), fill=grid[i, j].color.value)
+        canvas.bind("<Button-1>", self.controller.onClickEvent)
+        canvas.bind("<Motion>", self.controller.onHoveringEvent)
 
     def clear_grid(self):
         for widget in self.winfo_children():
             widget.destroy()
+
+    def changeColorForme(self, selectedCubesPos,grid):
+        """
+        Change la couleur des cubes adjacents au cube principal (même couleur)
+        :param selectedCubesPos: liste des cubes à modifier
+        """
+        cubeSize = 600 / grid.nb_col_row
+        canvas = Canvas(self, width=0, height=0, borderwidth=0, highlightthickness=0)
+        canvas.pack(fill=BOTH, expand=1)
+        for vecteur in  selectedCubesPos:
+            i=vecteur.i
+            j=vecteur.j
+            canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
+                                            cubeSize * (i + 1), fill=grid[i, j].color.value)
+    def endView(self):
+        messagebox.showinfo("fin de la partie ","vous avez fini la partie" )

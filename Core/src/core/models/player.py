@@ -1,3 +1,6 @@
+import core.models.grid as Grid
+
+
 class Player:
     """
     Classe mère qui représente un joueur
@@ -37,7 +40,7 @@ class Player:
         Méthode to string
         :return: la classe sous forme de string
         """
-        return f"id = {self.id}, nom = {self.name}, score = {self.score}"
+        return f"id = {self.id}, nom = {self.name}, "
 
     def increment_score(self, value: int) -> None:
         """
@@ -45,3 +48,11 @@ class Player:
         :param value: la valeur dont il faut incrémenté
         """
         self.score += value
+
+    def play(self, board: Grid) -> []:
+        """
+        fonction abstrait qui permet à un joueur de jouer
+        :param board:
+        :return:
+        """
+        raise NotImplementedError

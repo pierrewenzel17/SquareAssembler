@@ -1,8 +1,11 @@
 from stringcolor import cs
 
-from core.models import Cube, Position, Color
+from core.models.cube import Cube
+from core.models.position import Position
+from core.models.color import Color
 
-
+def test(liste):
+    return len(liste ) >=3
 class Grid:
     """Classe qui représente une grille"""
 
@@ -12,6 +15,7 @@ class Grid:
         :param nb_col_row: nombre le ligne - colonne, la grille est toujours un carré ex : 10*10 ou 20*20
         :param number_of_color: nombre de couleurs différentes dans la grille
         """
+        self.__nb_color=number_of_color
         self.nb_col_row, self.__matrix = nb_col_row, []
         self.__i = self.__j = 0
         dict_color: dict = Color.get_dict_color(number_of_color, nb_col_row)
@@ -81,22 +85,24 @@ class Grid:
             string_builder += "|\n"
         return string_builder
 
+    def getNbcolor(self):
+        return self.__nb_color
+
     def trouve_forme(self, cube, x, y) -> []:
         """
         fonction recherchant une  suite de cube de même couleur à partir d'une case de la grille
         :param cube:  cube de référence ,permet de connaitre la couleur souhaité
         :param x: la cordoné sur l'axe des i
         :param y: ma coordonnée sur l'axe des j
-        :return: une liste de position
+        :return: une liste de positions
         """
         if x < 0 or y < 0 or x >= self.nb_col_row or y >= self.nb_col_row:
             return []
         elif self[x, y] is None or cube is None:
             return []
         elif self[x, y].color == cube.color and self[x, y].est_visitable():
-            self[x, y].set_visitable(False)
-            tab_cube = []
-            tab_cube.append(Position(x, y))
+            self[x, y].setvisitable(False)
+            tab_cube = [Position(x, y)]
             left = self.trouve_forme(cube, x - 1, y)
             rigth = self.trouve_forme(cube, x + 1, y)
             down = self.trouve_forme(cube, x, y + 1)
@@ -185,18 +191,23 @@ class Grid:
         """
         for position in liste:
             x, y = position.i, position.j
-            self[x, y].set_visitable(True)
+            self[x, y].setvisitable(True)
 
     def fini(self) -> bool:
         '''
         fonction vérifiant la fin de la partie
         :return: true si il  reste plus de coup à jouer ,  sinon false
         '''
+        return self.parcourt(lambda x : self.coup_valide(x))
+
+
+    def parcourt(self,fontrion):
+        'lambda:'
         for x in range(0, self.nb_col_row):
             for y in range(0, self.nb_col_row):
                 liste = self.trouve_forme(self[x, y], x, y)
                 self.demarcage(liste)
-                if self.coup_valide(liste):
+                if fontrion(liste):
                     return False
         return True
 
@@ -242,11 +253,14 @@ if __name__ == '__main__':
         print(grid_10)
         l = 0
         liste = []
-        while l < 2:
+        while l < 3:
             x = input("On veut quel ligne ?")
             y = input("On veut quel colonne ?")
             liste = grid_10.trouve_forme(grid_10[int(x), int(y)], int(x), int(y))
+            for pos in liste :
+                print(pos)
             l = len(liste)
+
             grid_10.demarcage(liste)
         grid_10.retrait_cubes(liste)
     print("end game")
