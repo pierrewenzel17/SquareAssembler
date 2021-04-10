@@ -21,7 +21,7 @@ class GridView(Frame):
                     vecteur=Position(i,j)
                     if vecteur in liste:
                         canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
-                                                cubeSize * (i + 1), fill=grid[i, j].color.value, stipple="gray25"
+                                                cubeSize * (i + 1), fill=grid[i, j].color.value, stipple="gray50"
                                                 )
                     else:
                         canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),

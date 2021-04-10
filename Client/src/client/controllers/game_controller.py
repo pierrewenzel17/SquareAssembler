@@ -14,4 +14,5 @@ class GameController(Observer):
     def update(self, data) -> None:
         self.game.board = data
         self.game.player.score = 0
+        self.score_controller.var_score.set("0")
         self.grid_controller.printgrid()
