@@ -12,9 +12,6 @@ class Game:
     def isclear(self) -> bool:
         return self.board.fini()
 
-    @abstractmethod
-    def getscore(self):
-        pass
 
     @abstractmethod
     def move(self, position):

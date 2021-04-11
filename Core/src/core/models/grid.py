@@ -4,8 +4,19 @@ from core.models.cube import Cube
 from core.models.position import Position
 from core.models.color import Color
 
+
 def test(liste):
-    return len(liste ) >=3
+    return len(liste) >= 3
+
+
+def str_to_color(case: str):
+    liste_color = Color.Getall()
+    for i in range(0, 8):
+
+        if liste_color.__getitem__(i).value.__str__() == case:
+            return Cube(liste_color.__getitem__(i))
+
+
 class Grid:
     """Classe qui représente une grille"""
 
@@ -15,7 +26,7 @@ class Grid:
         :param nb_col_row: nombre le ligne - colonne, la grille est toujours un carré ex : 10*10 ou 20*20
         :param number_of_color: nombre de couleurs différentes dans la grille
         """
-        self.__nb_color=number_of_color
+        self.__nb_color = number_of_color
         self.nb_col_row, self.__matrix = nb_col_row, []
         self.__i = self.__j = 0
         dict_color: dict = Color.get_dict_color(number_of_color, nb_col_row)
@@ -81,7 +92,7 @@ class Grid:
                 if value is None:
                     string_builder += "|None"
                 else:
-                    string_builder += "|" + cs("cube", value.color.value)
+                    string_builder += "|" + value.color.value.__str__()
             string_builder += "|\n"
         return string_builder
 
@@ -198,10 +209,9 @@ class Grid:
         fonction vérifiant la fin de la partie
         :return: true si il  reste plus de coup à jouer ,  sinon false
         '''
-        return self.parcourt(lambda x : self.coup_valide(x))
+        return self.parcourt(lambda x: self.coup_valide(x))
 
-
-    def parcourt(self,fontrion):
+    def parcourt(self, fontrion):
         'lambda:'
         for x in range(0, self.nb_col_row):
             for y in range(0, self.nb_col_row):
@@ -235,32 +245,41 @@ class Grid:
         """
         return len(liste) >= 3
 
+    @classmethod
+    def recreate_gride(cls, grille: str) -> []:
+        lines = grille.split('\n')
+        matrix = []
+
+        for line in lines:
+            if line.startswith('|'):
+                rows = []
+                cases = line.split('|')
+                for case in cases:
+                    if case.startswith("#"):
+                        color = str_to_color(case)
+                        rows.append(color)
+                matrix.append(rows)
+        return matrix
+
+    @staticmethod
+    def rebulde( word_grid: str) :
+        cls:Grid=Grid(4,4)
+        cls.__i = cls.__j = 0
+        cls.__matrix = Grid.recreate_gride(word_grid)
+        cls.nb_col_row = cls.__matrix.__len__()
+        if cls.nb_col_row == 10:
+            cls.__nb_color = 4
+        else:
+            cls.__nb_color = 8
+        return  cls
 
 # main de test pour la classe Grille
 if __name__ == '__main__':
-    print("On test la classe grille")
+    print("On test la classe grille la retranscription d'une grille via un str \n ")
     grid_10 = Grid.grid_by_ten()
     print(grid_10)
-    grid_20 = Grid.grid_by_twenty()
-    print(grid_20)
-    print("test " + str(grid_10[0, 0]))
+    gridtest = Grid.rebulde(grid_10.__str__())
 
-    for cube in grid_10:
-        print(cube)
-
-    # simulation d'ue partie
-    while not grid_10.fini():
-        print(grid_10)
-        l = 0
-        liste = []
-        while l < 3:
-            x = input("On veut quel ligne ?")
-            y = input("On veut quel colonne ?")
-            liste = grid_10.trouve_forme(grid_10[int(x), int(y)], int(x), int(y))
-            for pos in liste :
-                print(pos)
-            l = len(liste)
-
-            grid_10.demarcage(liste)
-        grid_10.retrait_cubes(liste)
-    print("end game")
+    print("grille retranscrite : \n ")
+    print(gridtest)
+    print(gridtest.nb_col_row)

@@ -7,4 +7,5 @@ class WelcomeController:
         self.view = WelcomeView(self, self.parent)
 
     def run(self):
+        self.parent.wm_attributes("-transparentcolor", "grey")
         self.parent.mainloop()

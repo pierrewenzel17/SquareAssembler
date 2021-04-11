@@ -55,6 +55,7 @@ class Color(Enum):
         :param grid_len: la taille de la grille
         :return: un dictionnaire dont la clef est la couleur et la valeur, le nombre d'occurrences nécessaire
         """
+
         color_list: list = Color.__get_list_of_first(nb)
         nb_type_color: int = grid_len * grid_len // nb
         return_color: dict = {}
@@ -63,6 +64,9 @@ class Color(Enum):
             return_color[color] = nb_type_color
         return return_color
 
+    @staticmethod
+    def Getall():
+        return  Color.__get_list_of_first(8)
     @staticmethod
     def get_random_color(dict_color: dict) -> 'Color':
         """

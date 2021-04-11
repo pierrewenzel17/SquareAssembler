@@ -52,8 +52,6 @@ class GameTwoPlayer(Game):
                         return False
             return True
 
-    def getscore(self):
-        return self.__player.score
 
     def otherPlayer(self):
         if self.getTurn() == 0:

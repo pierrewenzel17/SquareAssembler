@@ -17,7 +17,7 @@ class GridController:
         self.onHoveringEvent(event)
         if self.game_controller.game.isclear():
             self.game_controller.game.player.save_score()
-            self.view.endView()
+            self.view.end_view()
 
     def onHoveringEvent(self, event):
         self.game_controller.game.move(self.__getCubeByCoord(event))
