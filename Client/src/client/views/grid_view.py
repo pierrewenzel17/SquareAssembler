@@ -9,9 +9,10 @@ class GridView(Frame):
     def __init__(self, master, controller):
         super().__init__(master)
         self.controller = controller
+        self.onlineController = OnlineControlleur()
         self.grid(row=0, column=1, rowspan=2, ipadx=300, ipady=300, sticky="NEWS")
 
-    def print_grid(self, grid,liste):
+    def print_grid(self, grid, liste):
         self.clear_grid()
         cubeSize = 600 / grid.nb_col_row
         canvas = Canvas(self, width=0, height=0, borderwidth=0, highlightthickness=0)
@@ -19,14 +20,14 @@ class GridView(Frame):
         for i in range(0, grid.nb_col_row):
             for j in range(0, grid.nb_col_row):
                 if grid[i, j] is not None:
-                    vecteur=Position(i,j)
+                    vecteur = Position(i, j)
                     if vecteur in liste:
                         canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
                                                 cubeSize * (i + 1), fill=grid[i, j].color.value, stipple="gray50"
                                                 )
                     else:
                         canvas.create_rectangle(j * cubeSize, i * cubeSize, cubeSize * (j + 1),
-                                            cubeSize * (i + 1), fill=grid[i, j].color.value)
+                                                cubeSize * (i + 1), fill=grid[i, j].color.value)
         canvas.bind("<Button-1>", self.controller.onClickEvent)
         canvas.bind("<Motion>", self.controller.onHoveringEvent)
 

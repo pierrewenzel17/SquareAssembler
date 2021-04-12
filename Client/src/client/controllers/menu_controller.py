@@ -11,7 +11,7 @@ class MenuController(Observable):
         self.parent = parent
         self.view = MenuView(parent, self)
 
-    def new_game(self, grid, online):
+    def new_game(self, grid):
         if grid == 1:
             super().notify(Grid.grid_by_ten())
         else:

@@ -66,7 +66,7 @@ class GameTwoPlayer(Game):
         cube = self.board[position.i, position.j]
         liste = self.board.trouve_forme(self.board[position.i, position.j], position.i, position.j)
         self.board.demarcage(liste)
-        ## verifier aussi que la couleur est soit libre soit prise par le joueur qui joue le tour
+        # verifier aussi que la couleur est soit libre soit prise par le joueur qui joue le tour
         if len(liste) > 2 and self.validColor(cube):
             self.CubeArray = liste
         else:

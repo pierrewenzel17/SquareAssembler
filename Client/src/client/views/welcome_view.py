@@ -24,23 +24,23 @@ class WelcomeView:
         self.logo = PhotoImage(file=os.path.join(os.getcwd(), 'resources/logo.png'))
         self.canvas.create_image(300, 15, image=self.logo, anchor="n")
         self.radio_ten = Radiobutton(self.canvas, text="grille 10x10", variable=self.var, value=1,
-                                     relief='solid', font=("Courier", 12, "bold")) \
+                                     relief='solid', font=("Franklin Gothic Heavy", 12, "bold")) \
             .place(relx=0.35, rely=0.35, anchor=CENTER)
         self.radio_twenty = Radiobutton(self.canvas, text="grille 20x20", variable=self.var, value=2,
-                                        relief='solid', font=("Courier", 12, "bold")) \
+                                        relief='solid', font=("Franklin Gothic Heavy", 12, "bold")) \
             .place(relx=0.65, rely=0.35, anchor=CENTER)
         self.btnPlay = Button(self.canvas, text="Jouer seul", command=self.runGame, width=30, relief='solid',
                               font=("Franklin Gothic Heavy", 15, "bold")) \
             .place(relx=0.5, rely=0.5, anchor=CENTER)
         self.btnCreateOnlineGame = Button(self.canvas, text="Créer une partie en ligne", width=30,
-                                          font=("Courier", 15, "bold"), relief='solid',
+                                          font=("Franklin Gothic Heavy", 15, "bold"), relief='solid',
                                           command=lambda: self.onlineController.create_game(OnlineView())) \
             .place(relx=0.5, rely=0.6, anchor=CENTER)
         self.btnJoinOnlineGame = Button(self.canvas, text="Rejoindre une partie en ligne", width=30,
-                                        font=("Courier", 15, "bold"), relief='solid',
+                                        font=("Franklin Gothic Heavy", 15, "bold"), relief='solid',
                                         command=lambda: self.onlineController.join_game(OnlineView())) \
             .place(relx=0.5, rely=0.7, anchor=CENTER)
-        self.btnQuit = Button(self.canvas, text="Quitter", font=("Courier", 15, "bold"), relief='solid',
+        self.btnQuit = Button(self.canvas, text="Quitter", font=("Franklin Gothic Heavy", 15, "bold"), relief='solid',
                               command=self.root.quit) \
             .place(relx=0.5, rely=0.85, anchor=CENTER)
 
