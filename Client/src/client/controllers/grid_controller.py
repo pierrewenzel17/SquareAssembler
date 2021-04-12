@@ -1,9 +1,12 @@
+from client.controllers.view_update import Observable
 from client.views.grid_view import GridView
+from core.models.grid import Grid
 from core.models.position import Position
 
 
-class GridController:
+class GridController(Observable):
     def __init__(self, parent, game_controller):
+        super().__init__()
         self.game_controller = game_controller
         self.parent = parent
         self.view = GridView(self.parent, self)
@@ -28,6 +31,17 @@ class GridController:
         return Position(convertWorldToGrid(event.y, self.game_controller.game.board.nb_col_row),
                         convertWorldToGrid(event.x, self.game_controller.game.board.nb_col_row))
 
+    def new_game(self, grid):
+        if grid == 1:
+            super().notify(Grid.grid_by_ten())
+        else:
+            super().notify(Grid.grid_by_twenty())
+
+    def update(self,valeur):
+        if valeur==1:
+            self.game_controller.update(Grid.grid_by_ten())
+        else :
+            self.game_controller.update(Grid.grid_by_twenty())
 
 def convertWorldToGrid(y, nbcolunn):
     cubeSize = 600 / nbcolunn

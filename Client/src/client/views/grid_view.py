@@ -48,7 +48,7 @@ class GridView(Frame):
         Radiobutton(top, text="grille 20x20", variable=radio_var, value=2, relief='solid') \
             .place(relx=0.7, rely=0.3, anchor=CENTER)
         Button(top, text="Jouer seul", width=30, relief='solid',
-               command=lambda: [self.controller.new_game(radio_var.get()), top.destroy()]) \
+               command=lambda: [self.resetlocal(radio_var.get()), top.destroy()]) \
             .place(relx=0.5, rely=0.5, anchor=CENTER)
         Button(top, text="Créer une partie en ligne", width=30, relief='solid',
                command=lambda: self.onlineController.create_game(OnlineView())) \
@@ -58,3 +58,7 @@ class GridView(Frame):
             .place(relx=0.5, rely=0.9, anchor=CENTER)
 
         top.mainloop()
+
+    def resetlocal(self,val):
+
+        self.controller.update(val)

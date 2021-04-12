@@ -86,7 +86,7 @@ class Grid:
         Méthode to string
         :return: la classe sous forme de string
         """
-        string_builder = ""
+        string_builder = "grid="
         for row in self.__matrix:
             for value in row:
                 if value is None:
@@ -247,11 +247,13 @@ class Grid:
 
     @classmethod
     def recreate_gride(cls, grille: str) -> []:
+
         lines = grille.split('\n')
+
         matrix = []
 
         for line in lines:
-            if line.startswith('|'):
+            if line.startswith('|') :
                 rows = []
                 cases = line.split('|')
                 for case in cases:

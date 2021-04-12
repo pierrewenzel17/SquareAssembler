@@ -33,7 +33,7 @@ class Position:
         Méthode to string
         :return: la classe sous forme de string
         """
-        return f"i = {self.i}, j = {self.j}"
+        return f"postion=i={self.i},j={self.j}"
 
     def __lt__(self, o: object) -> bool:
         """
@@ -47,6 +47,12 @@ class Position:
         else:
             return self.i < o.i
 
+    @staticmethod
+    def rebuld(position : str):
+        i=position.split(',')
+        vali=i[0].split('i=')[1]
+        valj=i[1].split('=')[1]
+        return Position(int(vali), int(valj))
 
 # main de test pour la classe Position
 if __name__ == '__main__':
@@ -60,3 +66,6 @@ if __name__ == '__main__':
     p2.i = 2
     # On test le not equal
     print(p2 != p1)
+    print("on test la retrancription de p1 de la position")
+    p3=Position.rebuld(p1.__str__())
+    print(p3)

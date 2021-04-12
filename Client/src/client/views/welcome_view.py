@@ -30,7 +30,7 @@ class WelcomeView:
                                         relief='solid', font=("Courier", 12, "bold")) \
             .place(relx=0.65, rely=0.35, anchor=CENTER)
         self.btnPlay = Button(self.canvas, text="Jouer seul", command=self.runGame, width=30, relief='solid',
-                              font=("Courier", 15, "bold")) \
+                              font=("Franklin Gothic Heavy", 15, "bold")) \
             .place(relx=0.5, rely=0.5, anchor=CENTER)
         self.btnCreateOnlineGame = Button(self.canvas, text="Créer une partie en ligne", width=30,
                                           font=("Courier", 15, "bold"), relief='solid',

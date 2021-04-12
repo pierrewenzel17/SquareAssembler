@@ -11,15 +11,15 @@ class GameTwoPlayer(Game):
         ## player = 0 player2 = 1
         super().__init__(board)
         self.turn = 0
-        self.__player1 = []
-        self.__player1.append(player1)
-        self.__player1.append(player2)
+        self.__player = []
+        self.__player.append(player1)
+        self.__player.append(player2)
         self.__colorallouer = [[], []]
 
         self.__time = time
 
     def getPlayer(self):
-        return self.__player1[self.turn]
+        return self.__player[self.turn]
 
     def getTurn(self):
         return self.turn
@@ -76,7 +76,7 @@ class GameTwoPlayer(Game):
         vecteur = self.CubeArray[0]
         couleur = self.board[vecteur.i, vecteur.j].color
         self.board.retrait_cubes(self.CubeArray)
-        self.__player1[self.getTurn()].score += len(self.CubeArray)
+        self.__player[self.getTurn()].score += len(self.CubeArray)
         ## verifier si le joueur qui cjoue posssège la coueur ,si non lui ajouter
         self.chekColorattribut(couleur)
 
