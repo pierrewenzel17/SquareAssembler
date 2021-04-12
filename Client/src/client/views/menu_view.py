@@ -1,8 +1,6 @@
 from tkinter import Frame, Button, Menu, Toplevel, messagebox, IntVar, Label, Radiobutton, Checkbutton, BOTTOM, TOP
 
 
-
-
 class MenuView(Frame):
 
     def __init__(self, master, controller):
@@ -21,7 +19,8 @@ class MenuView(Frame):
         master.config(menu=self.menuBar)
 
     def about(self):
-        messagebox.showinfo("information",self.controller.player.__str__())
+        messagebox.showinfo("information", self.controller.player.__str__())
+
     def newGameChoiceFrame(self):
         top = Toplevel()
         top.title("Choisir nouveau jeu")
