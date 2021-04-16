@@ -7,16 +7,20 @@ from core.models.position import Position
 
 
 class GameTwoPlayer(Game):
-    def __init__(self, board: Grid, player1: Player, player2: Player, time: int):
+    def __init__(self, board: Grid, player1: Player, time: int):
         ## player = 0 player2 = 1
         super().__init__(board)
         self.turn = 0
         self.__player = []
         self.__player.append(player1)
+        player2=Player(1,"adversair")
         self.__player.append(player2)
         self.__colorallouer = [[], []]
 
         self.__time = time
+
+    def getscore(self):
+        return self.__player[0].score
 
     def getPlayer(self):
         return self.__player[self.turn]
@@ -59,8 +63,19 @@ class GameTwoPlayer(Game):
         else:
             return 0
 
-    def changeTurn(self):
-        self.turn = self.otherPlayer()
+
+
+
+    def changeTurn(self, isturn:bool):
+        '''
+
+        :param isturn: booléein récupéré depuis le controleur indique si c'est notre tour ou celui de l'adversaire
+        :return:
+        '''
+        if isturn:
+            self.turn=0
+        else:
+            self.turn=1
 
     def move(self, position):
         cube = self.board[position.i, position.j]
@@ -80,9 +95,7 @@ class GameTwoPlayer(Game):
         ## verifier si le joueur qui cjoue posssège la coueur ,si non lui ajouter
         self.chekColorattribut(couleur)
 
-        self.changeTurn()
-        if not self.playercanplay():
-            self.changeTurn()
+
 
     def playercanplay(self):
         return self.board.parcourt(lambda x: self.couposible(x))

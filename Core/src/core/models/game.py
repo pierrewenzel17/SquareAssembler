@@ -20,3 +20,6 @@ class Game:
     @abstractmethod
     def play(self):
         pass
+
+    def coup_valide(self)-> bool:
+        return len(self.CubeArray)>2

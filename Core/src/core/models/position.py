@@ -33,7 +33,7 @@ class Position:
         Méthode to string
         :return: la classe sous forme de string
         """
-        return f"postion=i={self.i},j={self.j}"
+        return f"i={self.i},j={self.j}"
 
     def __lt__(self, o: object) -> bool:
         """

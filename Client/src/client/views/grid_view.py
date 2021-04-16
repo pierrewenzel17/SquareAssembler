@@ -1,7 +1,6 @@
 from tkinter import Frame, Canvas, BOTH, Toplevel, IntVar, Label, Radiobutton, Button, CENTER, TOP
 
-from client.controllers.online_controlleur import OnlineControlleur
-from client.views.online_view import OnlineView
+
 from core.models.position import Position
 
 
@@ -9,7 +8,7 @@ class GridView(Frame):
     def __init__(self, master, controller):
         super().__init__(master)
         self.controller = controller
-        self.onlineController = OnlineControlleur()
+##        self.onlineController = OnlineControlleur()
         self.grid(row=0, column=1, rowspan=2, ipadx=300, ipady=300, sticky="NEWS")
 
     def print_grid(self, grid, liste):
@@ -51,15 +50,16 @@ class GridView(Frame):
         Button(top, text="Jouer seul", width=30, relief='solid',
                command=lambda: [self.resetlocal(radio_var.get()), top.destroy()]) \
             .place(relx=0.5, rely=0.5, anchor=CENTER)
+
+        top.mainloop()
+        '''
         Button(top, text="Créer une partie en ligne", width=30, relief='solid',
                command=lambda: self.onlineController.create_game(OnlineView())) \
             .place(relx=0.5, rely=0.7, anchor=CENTER)
         Button(top, text="Rejoindre une partie en ligne", width=30, relief='solid',
                command=lambda: self.onlineController.join_game(OnlineView())) \
             .place(relx=0.5, rely=0.9, anchor=CENTER)
-
-        top.mainloop()
-
+        '''
     def resetlocal(self,val):
 
         self.controller.update(val)

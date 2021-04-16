@@ -15,12 +15,9 @@ class GridController(Observable):
         self.view.print_grid(self.game_controller.game.board,self.game_controller.game.CubeArray)
 
     def onClickEvent(self, event) -> None:
-        self.game_controller.game.play()
-        self.game_controller.score_controller.var_score.set(self.game_controller.game.getscore())
-        self.onHoveringEvent(event)
-        if self.game_controller.game.isclear():
-            self.game_controller.game.player.save_score()
-            self.view.end_view()
+        ### remonter ce code dans le game controlleur sinon sa va faire chier pour le linkage ivy
+        self.game_controller.react_click(event)
+
 
     def onHoveringEvent(self, event):
         self.game_controller.game.move(self.__getCubeByCoord(event))

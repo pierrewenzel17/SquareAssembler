@@ -16,3 +16,23 @@ class GameController(Observer):
         self.game.player.score = 0
         self.score_controller.var_score.set("0")
         self.grid_controller.printgrid()
+
+    def react_click(self, event):
+        self.grid_effect(event)
+        self.scor_effect()
+        self.end_impact()
+
+
+
+
+    def grid_effect(self,event):
+        self.game.play()
+        self.grid_controller.onHoveringEvent(event)
+
+    def scor_effect(self):
+        self.score_controller.var_score.set(self.game.getscore())
+
+    def end_impact(self):
+        if self.game.isclear():
+            self.game.player.save_score()
+            self.grid_controller.view.end_view()

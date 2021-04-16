@@ -3,16 +3,18 @@ from tkinter import PhotoImage, Canvas, Button, CENTER, NW, SW, Label, Tk, Radio
 
 from client.controllers.main_controller import MainController
 from client.controllers.online_controlleur import OnlineControlleur
+from client.models.serveur import StateOnline
 from client.utils.constant_util import Constants
-from client.views.online_view import OnlineView
+
 from core.models.grid import Grid
 
 
 class WelcomeView:
     def __init__(self, controller, root):
+        self.controller_main = None
         self.controller = controller
         self.root = root
-        self.onlineController = OnlineControlleur()
+        ## self.onlineController = OnlineControlleur() ## engueuler pierre et régler le problème
 
         self.var = IntVar()
         self.var.set(1)
@@ -34,11 +36,11 @@ class WelcomeView:
             .place(relx=0.5, rely=0.5, anchor=CENTER)
         self.btnCreateOnlineGame = Button(self.canvas, text="Créer une partie en ligne", width=30,
                                           font=("Franklin Gothic Heavy", 15, "bold"), relief='solid',
-                                          command=lambda: self.onlineController.create_game(OnlineView())) \
+                                          command=lambda: self.run_online(StateOnline.CREATE)) \
             .place(relx=0.5, rely=0.6, anchor=CENTER)
         self.btnJoinOnlineGame = Button(self.canvas, text="Rejoindre une partie en ligne", width=30,
                                         font=("Franklin Gothic Heavy", 15, "bold"), relief='solid',
-                                        command=lambda: self.onlineController.join_game(OnlineView())) \
+                                        command=lambda: self.run_online(StateOnline.JOIN)) \
             .place(relx=0.5, rely=0.7, anchor=CENTER)
         self.btnQuit = Button(self.canvas, text="Quitter", font=("Franklin Gothic Heavy", 15, "bold"), relief='solid',
                               command=self.root.quit) \
@@ -53,24 +55,27 @@ class WelcomeView:
         self.canvas.create_window(10, 10, anchor=NW, window=self.createdBy)
 
     def runGame(self):
-        self.root.destroy()
-        mainFrame = Tk()
-        mainFrame.title(Constants.GAME_TITLE)
-        mainFrame.resizable(width=Constants.RESIZE_FRAME, height=Constants.RESIZE_FRAME)
-        mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
-        print(self.var.get())
+
         if self.var.get() == 2:
-            controller_main = MainController(mainFrame, Grid.grid_by_twenty())
+            self.start_to_game(Grid.grid_by_twenty())
         else:
-            controller_main = MainController(mainFrame, Grid.grid_by_ten())
-        controller_main.run()
+            self.start_to_game(Grid.grid_by_ten())
 
-    def run_online(self):
+
+    def run_online(self, iserveur: StateOnline):
+
+        controller_main = OnlineControlleur(iserveur, self.var.get())
+        controller_main.online_game()
+        self.root.destroy()
+
+    def start_to_game(self, grid):
+        print(grid.nb_col_row)
+        # fonction permetant de passé de l'ecran de recherche de gamme à l'ecrtan de jeu
         self.root.destroy()
         mainFrame = Tk()
         mainFrame.title(Constants.GAME_TITLE)
         mainFrame.resizable(width=Constants.RESIZE_FRAME, height=Constants.RESIZE_FRAME)
         mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
 
-        controller_main = MainController(mainFrame, Grid.grid_by_twenty())
+        controller_main = MainController(mainFrame, grid)
         controller_main.run()

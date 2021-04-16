@@ -1,14 +1,13 @@
 from tkinter import Frame, Button, Menu, Toplevel, messagebox, IntVar, Label, Radiobutton, CENTER, TOP
 
-from client.controllers.online_controlleur import OnlineControlleur
-from client.views.online_view import OnlineView
+
 
 class MenuView(Frame):
 
     def __init__(self, master, controller):
         super().__init__(master, background="white")
         self.controller = controller
-        self.onlineController = OnlineControlleur()
+##        self.onlineController = OnlineControlleur()
 
         self.menuBar = Menu(master)
         self.fileMenu = Menu(self.menuBar, tearoff=0)
@@ -39,11 +38,11 @@ class MenuView(Frame):
         Button(top, text="Jouer seul", width=30, relief='solid',
                command=lambda: [self.controller.new_game(radio_var.get()), top.destroy()]) \
             .place(relx=0.5, rely=0.5, anchor=CENTER)
-        Button(top, text="Créer une partie en ligne", width=30, relief='solid',
+        ''' Button(top, text="Créer une partie en ligne", width=30, relief='solid',
                command=lambda: self.onlineController.create_game(OnlineView())) \
             .place(relx=0.5, rely=0.7, anchor=CENTER)
-        Button(top, text="Rejoindre une partie en ligne", width=30, relief='solid',
+            Button(top, text="Rejoindre une partie en ligne", width=30, relief='solid',
                command=lambda: self.onlineController.join_game(OnlineView())) \
             .place(relx=0.5, rely=0.9, anchor=CENTER)
-
+            '''
         top.mainloop()

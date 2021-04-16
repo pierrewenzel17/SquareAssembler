@@ -91,7 +91,7 @@ class Grid:
                     string_builder += "|None"
                 else:
                     string_builder += "|" + value.color.value.__str__()
-            string_builder += "|\n"
+            string_builder += "|ù"
         return string_builder
 
     def getNbcolor(self):
@@ -245,8 +245,8 @@ class Grid:
 
     @classmethod
     def recreate_gride(cls, grille: str) -> []:
-
-        lines = grille.split('\n')
+        aux=grille.split('=')
+        lines = aux[1].split('ù')
 
         matrix = []
 
