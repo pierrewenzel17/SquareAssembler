@@ -19,7 +19,7 @@ class ScoreView(Frame):
 
         self.blank = Label(self, height=1).pack()
         self.color_dispo = Label(self, text="Couleurs disponible :", font=("Courier", 15)).pack()
-        self.canvas = Canvas(self, borderwidth=0, highlightthickness=0 )
+        self.canvas = Canvas(self, borderwidth=0, highlightthickness=0)
         self.canvas.pack(fill=BOTH, expand=1)
         for i in range(0, COLORS.__len__()):
             self.canvas.create_rectangle(100, i * 25, 150, 25 * (i + 1), fill=COLORS[i])
