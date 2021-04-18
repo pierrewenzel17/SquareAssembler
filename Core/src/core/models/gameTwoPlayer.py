@@ -1,3 +1,4 @@
+from core.models.color import Color
 from core.models.game import Game
 from core.models.grid import Grid
 from core.models.player import Player
@@ -13,7 +14,7 @@ class GameTwoPlayer(Game):
         self.turn = 0
         self.__player = []
         self.__player.append(player1)
-        player2=Player(1,"adversair")
+        player2 = Player(1, "adversair")
         self.__player.append(player2)
         self.__colorallouer = [[], []]
 
@@ -33,29 +34,15 @@ class GameTwoPlayer(Game):
 
     def chekColorattribut(self, couleur):
         if len(self.__colorallouer[self.getTurn()]) < self.getColorMax():
-            ishere = False
-            for col in self.__colorallouer[self.getTurn()]:
-                if col == couleur:
-                    ishere = True
-            if not ishere:
+            if couleur not in self.__colorallouer[self.getTurn()] \
+                    and couleur not in self.__colorallouer[self.otherPlayer()]:
                 self.__colorallouer[self.getTurn()].append(couleur)
 
     def validColor(self, cube: Cube):
         if cube is None:
             return False
         else:
-            if len(self.__colorallouer[self.getTurn()]) == self.getColorMax():
-                for coleur in self.__colorallouer[self.getTurn()]:
-                    if cube.color == coleur:
-                        return True
-                return False
-            else:
-
-                for coleur in self.__colorallouer[self.otherPlayer()]:
-                    if cube.color == coleur:
-                        return False
-            return True
-
+            return self.__verif_color(cube.color)
 
     def otherPlayer(self):
         if self.getTurn() == 0:
@@ -63,19 +50,16 @@ class GameTwoPlayer(Game):
         else:
             return 0
 
-
-
-
-    def changeTurn(self, isturn:bool):
+    def changeTurn(self, isturn: bool):
         '''
 
         :param isturn: booléein récupéré depuis le controleur indique si c'est notre tour ou celui de l'adversaire
         :return:
         '''
         if isturn:
-            self.turn=0
+            self.turn = 0
         else:
-            self.turn=1
+            self.turn = 1
 
     def move(self, position):
         cube = self.board[position.i, position.j]
@@ -96,7 +80,6 @@ class GameTwoPlayer(Game):
         self.chekColorattribut(couleur)
 
 
-
     def playercanplay(self):
         return self.board.parcourt(lambda x: self.couposible(x))
 
@@ -107,6 +90,24 @@ class GameTwoPlayer(Game):
             return self.validColor(cube)
         return False
 
+    def get_player_color(self):
+        liste_color: list = Color.Getall()
+        list_final: list = []
+        for i in range(0, self.board.getNbcolor()):
+            if self.__verif_color(liste_color[i]):
+                list_final.append(liste_color[i])
+        return list_final
+
+    def get_time(self):
+        return self.__time
+    def __verif_color(self, color):
+        if len(self.__colorallouer[self.getTurn()]) == self.getColorMax():
+            return True if color in self.__colorallouer[self.getTurn()] else False
+        else:
+            return False if color in self.__colorallouer[self.otherPlayer()] else True
+
+    def game_master(self):
+        return self.__player[0]
 
 if __name__ == '__main__':
     print("On test la classe game2jpueur")

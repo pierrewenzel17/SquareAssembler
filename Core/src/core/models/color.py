@@ -13,7 +13,7 @@ class Color(Enum):
     YELLOW = "#F3FF00"
     PINK = "#EB58E9"
 
-    def __eq__(self, color: Enum) -> bool:
+    def __eq__(self, color: 'Color') -> bool:
         """
         Définition de l'opérateur ==, par consequent vérifie que la couleur courant
         est égal à la couleur passé en paramètre
@@ -29,7 +29,7 @@ class Color(Enum):
         :param color: La couleur à tester
         :return: True ou False selon les valeurs des couleurs
         """
-        return not self.name == color.name
+        return not self.value == color.value
 
     @staticmethod
     def __get_list_of_first(nb: int) -> list:

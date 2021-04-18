@@ -69,7 +69,7 @@ class WelcomeView:
         self.root.destroy()
 
     def start_to_game(self, grid):
-        print(grid.nb_col_row)
+
         # fonction permetant de passé de l'ecran de recherche de gamme à l'ecrtan de jeu
         self.root.destroy()
         mainFrame = Tk()

@@ -20,8 +20,9 @@ class GridController(Observable):
 
 
     def onHoveringEvent(self, event):
-        self.game_controller.game.move(self.__getCubeByCoord(event))
-        self.printgrid()
+        self.game_controller.on_hovering_effect(self.__getCubeByCoord(event))
+
+        #self.printgrid()
         self.game_controller.score_controller.var_block_score.set(len(self.game_controller.game.CubeArray))
 
     def __getCubeByCoord(self, event):

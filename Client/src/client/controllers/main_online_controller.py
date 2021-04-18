@@ -17,5 +17,17 @@ class MainOnlineController:
                                                                             player,10),onlinecontroller)
         self.menu_controller.add_observer(self.game_controller)
 
+
     def run(self):
+        self.update_time()
+        self.refresh_view()
         self.mainFrame.mainloop()
+
+
+    def update_time(self):
+        self.game_controller.up_timer()
+        self.mainFrame.after(1000, self.update_time)
+
+    def refresh_view(self):
+        self.game_controller.grd_refresh()
+        self.mainFrame.after(100, self.refresh_view)

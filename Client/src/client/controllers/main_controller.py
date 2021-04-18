@@ -21,4 +21,9 @@ class MainController:
         self.menu_controller.add_observer(self.game_controller)
 
     def run(self):
+        self.refresh_view()
         self.mainFrame.mainloop()
+
+    def refresh_view(self):
+        self.game_controller.grd_refresh()
+        self.mainFrame.after(100, self.refresh_view)

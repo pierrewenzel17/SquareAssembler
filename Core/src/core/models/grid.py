@@ -207,7 +207,7 @@ class Grid:
         fonction vérifiant la fin de la partie
         :return: true si il  reste plus de coup à jouer ,  sinon false
         '''
-        return self.parcourt(lambda x: self.coup_valide(x))
+        return not self.parcourt(lambda x: self.coup_valide(x))
 
     def parcourt(self, fontrion):
         'lambda:'
@@ -216,8 +216,8 @@ class Grid:
                 liste = self.trouve_forme(self[x, y], x, y)
                 self.demarcage(liste)
                 if fontrion(liste):
-                    return False
-        return True
+                    return True
+        return False
 
     @classmethod
     def grid_by_ten(cls) -> 'Grid':

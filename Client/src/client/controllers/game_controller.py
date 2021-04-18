@@ -10,12 +10,14 @@ class GameController(Observer):
         self.grid_controller = GridController(parent, self)
         self.grid_controller.printgrid()
         self.score_controller = ScoreController(parent)
+        self.score_controller.reload_color(self.game.get_player_color())
 
     def update(self, data) -> None:
         self.game.board = data
         self.game.player.score = 0
         self.score_controller.var_score.set("0")
         self.grid_controller.printgrid()
+        self.score_controller.reload_color(self.game.get_player_color())
 
     def react_click(self, event):
         self.grid_effect(event)
@@ -24,6 +26,8 @@ class GameController(Observer):
 
 
 
+    def grd_refresh(self):
+        self.grid_controller.printgrid()
 
     def grid_effect(self,event):
         self.game.play()
@@ -34,5 +38,8 @@ class GameController(Observer):
 
     def end_impact(self):
         if self.game.isclear():
-            self.game.player.save_score()
+            self.game.game_master().save_score()
             self.grid_controller.view.end_view()
+
+    def on_hovering_effect(self,position):
+        self.game.move(position)

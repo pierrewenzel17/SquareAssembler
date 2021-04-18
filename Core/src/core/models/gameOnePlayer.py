@@ -1,3 +1,4 @@
+from core.models.color import Color
 from core.models.game import Game
 from core.models.grid import Grid
 from core.models.player import Player
@@ -25,3 +26,13 @@ class GameOnePlayer(Game):
         self.board.retrait_cubes(self.CubeArray)
         print()
         self.player.score += len(self.CubeArray)
+
+    def get_player_color(self) :
+        liste_color:list= Color.Getall()
+        list_final:list=[]
+        for i in range(0,self.board.getNbcolor()):
+            list_final.append(liste_color[i])
+        return list_final
+
+    def game_master(self):
+        return self.player
