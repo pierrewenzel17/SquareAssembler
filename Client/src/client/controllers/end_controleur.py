@@ -1,15 +1,16 @@
 from client.controllers.view_update import Observable
-from client.views.menu_view import MenuView
+from client.views.end_view import End_view
+
 from core.models.grid import Grid
 
 
-class MenuController(Observable):
+class EndController(Observable):
 
-    def __init__(self, parent,player) -> None:
-        self.player = player
+    def __init__(self) -> None:
+
         super().__init__()
-        self.parent = parent
-        self.view = MenuView(parent, self)
+
+        self.view = End_view( self)
 
     def new_game(self, grid):
 
@@ -21,3 +22,5 @@ class MenuController(Observable):
     def new_game_online(self,grid,iserveur):
         super().notify_online(grid,iserveur)
 
+    def print_end(self):
+        self.view.newGameChoiceFrame()

@@ -1,30 +1,24 @@
 from client.controllers.grid_controller import GridController
+
 from client.controllers.score_controller import ScoreController
-from client.controllers.view_update import Observer
 
 
-class GameController(Observer):
+
+class GameController:
 
     def __init__(self, parent, game):
         self.game = game
-        self.grid_controller = GridController(parent, self)
-        self.grid_controller.printgrid()
-        self.score_controller = ScoreController(parent)
-        self.score_controller.reload_color(self.game.get_player_color())
-
-    def update(self, data) -> None:
-        self.game.board = data
-        self.game.player.score = 0
-        self.score_controller.var_score.set("0")
-        self.grid_controller.printgrid()
-        self.score_controller.reload_color(self.game.get_player_color())
+        if parent is not None :
+            self.grid_controller = GridController(parent, self)
+            #self.grid_controller.printgrid()
+            self.score_controller = ScoreController(parent)
+            self.score_controller.reload_color(self.game.get_player_color())
+        self.end_controlleur=None
 
     def react_click(self, event):
         self.grid_effect(event)
         self.scor_effect()
         self.end_impact()
-
-
 
     def grd_refresh(self):
         self.grid_controller.printgrid()
@@ -39,7 +33,24 @@ class GameController(Observer):
     def end_impact(self):
         if self.game.isclear():
             self.game.game_master().save_score()
-            self.grid_controller.view.end_view()
+            self.end_controlleur.print_end()
 
     def on_hovering_effect(self,position):
         self.game.move(position)
+
+    def adapt(self, parent):
+        self.parent = parent
+        self.grid_controller = GridController(parent, self)
+
+        self.score_controller = ScoreController(parent)
+        self.score_controller.reload_color(self.game.get_player_color())
+
+
+    def up_timer(self):
+        pass
+
+    def quit(self):
+        print("")
+
+    def set_end_controller(self, end_vcontroleur):
+        self.end_controlleur=end_vcontroleur

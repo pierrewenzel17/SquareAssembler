@@ -36,3 +36,7 @@ class Game:
     @abstractmethod
     def game_master(self):
         pass
+
+    @abstractmethod
+    def set_player(self,player):
+        pass

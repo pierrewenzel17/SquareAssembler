@@ -1,10 +1,12 @@
 import os
 from tkinter import PhotoImage, Canvas, Button, CENTER, NW, SW, Label, Tk, Radiobutton, IntVar
 
+from client.controllers.game_controller import GameController
 from client.controllers.main_controller import MainController
 from client.controllers.online_controlleur import OnlineControlleur
 from client.models.serveur import StateOnline
 from client.utils.constant_util import Constants
+from core.models.gameOnePlayer import GameOnePlayer
 
 from core.models.grid import Grid
 
@@ -63,14 +65,20 @@ class WelcomeView:
 
 
     def run_online(self, iserveur: StateOnline):
-
-        controller_main = OnlineControlleur(iserveur, self.var.get())
-        controller_main.online_game()
+        self.root.quit()
         self.root.destroy()
+        controlle_main = OnlineControlleur(iserveur, self.var.get())
+        controlle_main.onlinec_game()
+
+
+
+
 
     def start_to_game(self, grid):
 
         # fonction permetant de passé de l'ecran de recherche de gamme à l'ecrtan de jeu
+
+        self.root.quit()
         self.root.destroy()
         mainFrame = Tk()
         mainFrame.title(Constants.GAME_TITLE)
@@ -78,4 +86,6 @@ class WelcomeView:
         mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
 
         controller_main = MainController(mainFrame, grid)
+
         controller_main.run()
+

@@ -5,4 +5,4 @@ class Constants:
     RESIZE_FRAME: bool = False
     MAX_COLOR = 4
     GAME_TITLE: str = "Square Assembler"
-    MESSAGE_ADVERCE_TURN : str= "tour de l'advairsaire"
+    MESSAGE_ADVERCE_TURN : str= "tour de l'adversaire"

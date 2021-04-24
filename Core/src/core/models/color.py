@@ -4,14 +4,14 @@ import random
 
 class Color(Enum):
     """Énumération des couleurs que peuvent prendre un Cube"""
-    RED = "#FF0000"
-    BLUE = "#07ACF4"
-    GREEN = "#25D147"
+    ROUGE = "#FF0000"
+    BLEU = "#07ACF4"
+    VERT = "#25D147"
     ORANGE = "#FE6C00"
-    PURPLE = "#A30571"
-    BROWN = "#C17A06"
-    YELLOW = "#F3FF00"
-    PINK = "#EB58E9"
+    VIOLET = "#A30571"
+    BRUN = "#C17A06"
+    JAUNE = "#F3FF00"
+    ROSE = "#EB58E9"
 
     def __eq__(self, color: 'Color') -> bool:
         """

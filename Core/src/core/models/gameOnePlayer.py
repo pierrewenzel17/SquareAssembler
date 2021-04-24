@@ -7,9 +7,9 @@ from core.models.player import Player
 
 class GameOnePlayer(Game):
 
-    def __init__(self, board: Grid, player: Player):
+    def __init__(self, board: Grid):
         super().__init__(board)
-        self.player = player
+        self.player =None
 
     def getscore(self):
         return self.player.score
@@ -36,3 +36,6 @@ class GameOnePlayer(Game):
 
     def game_master(self):
         return self.player
+
+    def set_player(self,player):
+        self.player=player

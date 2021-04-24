@@ -8,14 +8,12 @@ from core.models.position import Position
 
 
 class GameTwoPlayer(Game):
-    def __init__(self, board: Grid, player1: Player, time: int):
+    def __init__(self, board: Grid, time: int):
         ## player = 0 player2 = 1
         super().__init__(board)
         self.turn = 0
         self.__player = []
-        self.__player.append(player1)
-        player2 = Player(1, "adversair")
-        self.__player.append(player2)
+
         self.__colorallouer = [[], []]
 
         self.__time = time
@@ -108,6 +106,11 @@ class GameTwoPlayer(Game):
 
     def game_master(self):
         return self.__player[0]
+
+    def set_player(self,player):
+        self.__player.append(player)
+        player2 = Player(1, "adversair")
+        self.__player.append(player2)
 
 if __name__ == '__main__':
     print("On test la classe game2jpueur")

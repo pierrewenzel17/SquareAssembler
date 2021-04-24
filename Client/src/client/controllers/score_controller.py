@@ -12,9 +12,8 @@ class ScoreController:
         self.var_time = StringVar(value="")
         self.view = ScoreView(parent, self)
 
-
-    def reload_color(self,color):
+    def reload_color(self, color):
         self.view.contruct_kist_of_cole(color)
 
-    def upfdate_timer(self,time):
-        self.var_time.set("time : "+str(time))
+    def upfdate_timer(self, time):
+        self.var_time.set("Temps restant : " + str(time))

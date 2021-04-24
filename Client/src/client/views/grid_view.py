@@ -33,32 +33,3 @@ class GridView(Frame):
 
 
 
-    def end_view(self):
-        top = Toplevel()
-        top.title("Relancer une nouvelle partie")
-        top.geometry("300x200+550+350")
-        top.minsize(300, 200)
-        radio_var = IntVar()
-        radio_var.set(1)
-
-        Label(top, text="Partie terminée !", font=("Courier", 20, "bold")).pack(side=TOP)
-        Radiobutton(top, text="grille 10x10", variable=radio_var, value=1, relief='solid') \
-            .place(relx=0.3, rely=0.3, anchor=CENTER)
-        Radiobutton(top, text="grille 20x20", variable=radio_var, value=2, relief='solid') \
-            .place(relx=0.7, rely=0.3, anchor=CENTER)
-        Button(top, text="Jouer seul", width=30, relief='solid',
-               command=lambda: [self.resetlocal(radio_var.get()), top.destroy()]) \
-            .place(relx=0.5, rely=0.5, anchor=CENTER)
-
-        top.mainloop()
-        '''
-        Button(top, text="Créer une partie en ligne", width=30, relief='solid',
-               command=lambda: self.onlineController.create_game(OnlineView())) \
-            .place(relx=0.5, rely=0.7, anchor=CENTER)
-        Button(top, text="Rejoindre une partie en ligne", width=30, relief='solid',
-               command=lambda: self.onlineController.join_game(OnlineView())) \
-            .place(relx=0.5, rely=0.9, anchor=CENTER)
-        '''
-    def resetlocal(self,val):
-
-        self.controller.update(val)
