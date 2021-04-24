@@ -25,7 +25,7 @@ class play_controlleur:
         def disconect(agent):
             self.agent.stop()
             self.agent=None
-            self.game_controlleur.end_impact()
+            self.game_controlleur.end_controlleur.print_end()
 
         # self.agent.bind_msg(play_little_game, f'pos=(.*)')
         self.agent.bind_msg(disconect, 'parti')

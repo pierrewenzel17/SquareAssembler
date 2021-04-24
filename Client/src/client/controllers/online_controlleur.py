@@ -1,14 +1,12 @@
 from threading import Timer
-from tkinter import Tk
+
 
 from client.controllers.Play_online_xontrolleur import play_controlleur
 
-import client.controllers.main_controller as mc
-from client.controllers.end_controleur import EndController
 from client.controllers.game_online_controlleur import Game_Online_contolleur
 
 from client.models.serveur import StateOnline, MyAgent
-from client.utils.constant_util import Constants
+
 from core.models.gameTwoPlayer import GameTwoPlayer
 
 from core.models.grid import Grid
@@ -25,6 +23,7 @@ class OnlineControlleur:
         # controleur gérant la connection entre l'Ivy le back et le front
         self.superieur = None
         self.typegame = type_game
+        self.control=None
 
     def add_apelant(self, invoc):
         self.invoc = invoc
@@ -128,17 +127,6 @@ class OnlineControlleur:
         self.agent = None
         game = GameTwoPlayer(grid, 10)
 
-        mainFrame = Tk()
-        mainFrame.title(Constants.GAME_TITLE)
-        mainFrame.resizable(width=Constants.RESIZE_FRAME, height=Constants.RESIZE_FRAME)
-        mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
 
-        controller_main = mc.MainController(mainFrame, Grid.grid_by_ten())
-        con = Game_Online_contolleur(controller_main.mainFrame, game, play_controlleur(self.state_online, self.my_turn))
-        controller_main.game_controller = con
-        end_controleur = EndController()
-        end_controleur.add_observer(controller_main)
-        con.set_end_controller(end_controleur)
-        controller_main.game_controller.game.set_player(controller_main.player)
-
-        controller_main.run()
+        con = Game_Online_contolleur(None, game, play_controlleur(self.state_online, self.my_turn))
+        self.control=con

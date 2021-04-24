@@ -75,6 +75,7 @@ class MainController(Observer):
 
     def update_quit(self):
         self.__stop()
+        self.mainFrame.quit()
         self.mainFrame.destroy()
 
     def __stop(self):
@@ -84,7 +85,4 @@ class MainController(Observer):
         if self.__jobrefresh is not None:
             self.mainFrame.after_cancel(self.__jobrefresh)
             self.__jobrefresh = None
-
-        if self.__main_job is not None:
-            self.__main_job = None
         self.game_controller.quit()

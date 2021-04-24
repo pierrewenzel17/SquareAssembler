@@ -50,7 +50,7 @@ class GameController:
         pass
 
     def quit(self):
-        print("")
+        print("p")
 
     def set_end_controller(self, end_vcontroleur):
         self.end_controlleur=end_vcontroleur

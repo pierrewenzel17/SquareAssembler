@@ -1,6 +1,7 @@
 import os
 from tkinter import PhotoImage, Canvas, Button, CENTER, NW, SW, Label, Tk, Radiobutton, IntVar
 
+from client.controllers.end_controleur import EndController
 from client.controllers.game_controller import GameController
 from client.controllers.main_controller import MainController
 from client.controllers.online_controlleur import OnlineControlleur
@@ -65,20 +66,37 @@ class WelcomeView:
 
 
     def run_online(self, iserveur: StateOnline):
-        self.root.quit()
+
         self.root.destroy()
         controlle_main = OnlineControlleur(iserveur, self.var.get())
+
         controlle_main.onlinec_game()
 
 
+        while controlle_main.control is None :
+            pass
 
+        mainFrame = Tk()
+        mainFrame.title(Constants.GAME_TITLE)
+        mainFrame.resizable(width=Constants.RESIZE_FRAME, height=Constants.RESIZE_FRAME)
+        mainFrame.minsize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT)
+
+        controller_main = MainController(mainFrame, Grid.grid_by_ten())
+        controlle_main.control.adapt(controller_main.mainFrame)
+        controller_main.game_controller =  controlle_main.control
+        end_controleur = EndController()
+        end_controleur.add_observer(controller_main)
+        controller_main.game_controller.set_end_controller(end_controleur)
+        controller_main.game_controller.game.set_player(controller_main.player)
+
+        controller_main.run()
 
 
     def start_to_game(self, grid):
 
         # fonction permetant de passé de l'ecran de recherche de gamme à l'ecrtan de jeu
 
-        self.root.quit()
+
         self.root.destroy()
         mainFrame = Tk()
         mainFrame.title(Constants.GAME_TITLE)

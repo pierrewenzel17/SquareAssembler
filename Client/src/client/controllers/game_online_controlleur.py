@@ -1,3 +1,5 @@
+from time import sleep
+
 from client.controllers.game_controller import GameController
 
 from client.utils.constant_util import Constants
@@ -42,8 +44,9 @@ class Game_Online_contolleur(GameController):
         if self.online_controleur.my_turn:
             self.score_controller.upfdate_timer(self.time)
             if self.time == 0:
-                self.online_controleur.agent.send_msg("no")
-                self.pas_to_other_turn()
+                if self.online_controleur.agent is not None:
+                    self.online_controleur.agent.send_msg("no")
+                    self.pas_to_other_turn()
             self.time -= 1
 
 
@@ -72,9 +75,12 @@ class Game_Online_contolleur(GameController):
             self.score_controller.var_time.set(Constants.MESSAGE_ADVERCE_TURN)
 
     def quit(self):
-        self.online_controleur.agent.send_msg('parti')
-        self.online_controleur.agent.stop()
-        self.online_controleur.agent=None
+        if self.online_controleur.agent is not None :
+            self.online_controleur.agent.send_msg('parti')
+            sleep(2)
+            self.online_controleur.agent.stop()
+            self.online_controleur.agent=None
+
     def grd_refresh(self):
 
         GameController.grd_refresh(self)
