@@ -30,6 +30,7 @@ class MainController(Observer):
         end_vcontroleur.add_observer(self)
         self.game_controller.set_end_controller(end_vcontroleur)
         self.__main_job=None
+        self.mainFrame.protocol("WM_DELETE_WINDOW", self.update_quit)
 
     def run(self):
         self.update_time()
@@ -75,7 +76,7 @@ class MainController(Observer):
 
     def update_quit(self):
         self.__stop()
-        self.mainFrame.quit()
+
         self.mainFrame.destroy()
 
     def __stop(self):
